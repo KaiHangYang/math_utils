@@ -116,9 +116,8 @@ _m = {};
     }
     
     function normfv(v) {
-        v = Array.prototype.slice.call(v);
-        var norm = Math.sqrt(v.map(function(a) {return a * a;}).reduce(function(a, b) {return a + b;}));
-        return v.map(function(a) {return a / norm;});
+        var norm = vector_norm(v);
+        return Array.prototype.map.call(v, function(a) {return a / norm;});
     }
     
     function deg2rad(deg) {
@@ -132,6 +131,13 @@ _m = {};
     function vector_add(vec_a, vec_b) {
         vec_a = Array.prototype.slice.call(vec_a);
         return vec_a.map(function(x, idx) {return x + vec_b[idx]});
+    }
+    function vector_frac(vec_a, v) {
+        return Array.prototype.map.call(vec_a, function(a) {return a / v});
+    }
+    function vector_norm(v) {
+        var norm = Math.sqrt(Array.prototype.map.call(v, function(a) {return a * a;}).reduce(function(a, b) {return a + b;}));
+        return norm;
     }
     
     // Only support vec3 cross
