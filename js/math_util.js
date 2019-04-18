@@ -79,7 +79,9 @@ function matrix_fill(s, v) {
     var matrix = new Array(m);
     for (var i = 0; i < m; ++i) {
         matrix[i] = new Array(n);
-        matrix[i].fill(v)
+        for (var j = 0; j < n; ++j) {
+            matrix[i][j] = v;
+        }
     }
     return matrix;
 }
@@ -88,7 +90,9 @@ function matrix_identity(s) {
     var identity = new Array(s);
     for (var i = 0; i < s; ++i) {
         identity[i] = new Array(s);
-        identity[i].fill(0.0)
+        for (var j = 0; j < s; ++j) {
+            identity[i][j] = 0.0;
+        }
         identity[i][i] = 1.0
     }
 
@@ -109,7 +113,7 @@ function matrix_clone(mat) {
 }
 
 function normfv(v) {
-    v = new Float32Array(v);
+    v = Array.prototype.slice.call(v);
     var norm = Math.sqrt(v.map(function(a) {return a * a;}).reduce(function(a, b) {return a + b;}));
     return v.map(function(a) {return a / norm;});
 }
@@ -119,9 +123,11 @@ function deg2rad(deg) {
 }
 
 function vector_minus(vec_a, vec_b) {
+    vec_a = Array.prototype.slice.call(vec_a);
     return vec_a.map(function(x, idx) {return x - vec_b[idx]});
 }
 function vector_add(vec_a, vec_b) {
+    vec_a = Array.prototype.slice.call(vec_a);
     return vec_a.map(function(x, idx) {return x + vec_b[idx]});
 }
 
@@ -134,6 +140,7 @@ function vector_cross(vec_a, vec_b) {
     return vec_c;
 }
 function vector_dot(vec_a, vec_b) {
+    vec_a = Array.prototype.slice.call(vec_a);
     return vec_a.map(function(a, idx) {return a * vec_b[idx];}).reduce(function(a, b) {return a + b;});
 }
 
@@ -177,7 +184,7 @@ function perspective(fov, ratio, near, far) {
 }
 
 function lookAt(eye, target, up) {
-    eye = new Float32Array(eye);
+    eye = Array.prototype.slice.call(new Float32Array(eye));
     target = new Float32Array(target);
     up = new Float32Array(up);
 
