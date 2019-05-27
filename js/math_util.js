@@ -290,7 +290,7 @@ _m = {};
         var Y = Z.cross(X);
 
         eye.inplace_scale(-1);
-        var matrix = new K_Mat([X[0],X[1],X[2],X.dot(eye), Y[0],Y[1],Y[2],Y.dot(eye), Z[0],Z[1],Z[2],Z.dot(eye), 0., 0., 0., 1.]);
+        var matrix = new K_Mat([X.get(0),X.get(1),X.get(2),X.dot(eye), Y.get(0),Y.get(1),Y.get(2),Y.dot(eye), Z.get(0),Z.get(1),Z.get(2),Z.dot(eye), 0., 0., 0., 1.]);
     
         return matrix
     }
