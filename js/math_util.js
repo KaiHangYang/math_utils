@@ -23,7 +23,7 @@ _m = {};
 
     K_Mat.prototype.toFloat32Array = function() {
         if (this._transpose) {
-            var result = new Float32Array(this._size);
+            var result = new Float32Array(this._size*this._size);
             for (var i = 0; i < this._size; ++i) {
                 for (var j = 0; j < this._size; ++j) {
                     result[i * this._size + j] = this.get(i, j);
